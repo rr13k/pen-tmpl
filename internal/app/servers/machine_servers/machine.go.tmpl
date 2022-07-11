@@ -1,0 +1,23 @@
+package machineservers
+
+import (
+	"{.name}/internal/app/suger"
+	"fmt"
+	"net"
+)
+
+type MachineConfig struct {
+	Cpu  int
+	Disk int
+	Mem  int
+}
+
+// 申请机器
+func Apple(machineConfig *MachineConfig, nodeId string) {
+}
+
+// jdos uuid为机器ip
+// jdcloud  uuid 为 容器id
+func Release(uuid string) error {
+
+}

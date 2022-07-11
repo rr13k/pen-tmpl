@@ -1,0 +1,16 @@
+package api
+
+import (
+	"{.name}/internal/app/api/handler"
+	"{.name}/internal/app/toolkit/router"
+)
+
+func RegisterApi() {
+
+	router.UrlGroup("/machine",
+		router.Url("/apple", handler.MachineApple),
+		router.Url("/release", handler.ReleaseMachine),
+	)
+
+	router.Init()
+}
