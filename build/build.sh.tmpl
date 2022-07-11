@@ -1,5 +1,5 @@
 echo building...
 # export GOOS=linux
 # export GOARCH=arm64
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build  -o ../cmd/{.name}  ../internal/app/main.go
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build  -o ../cmd/{{.Name}}  ../internal/app/main.go
 echo success
