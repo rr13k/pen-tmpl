@@ -1,15 +1,15 @@
 package main
 
 import (
-	"cloudCar/internal/app/api"
-	"cloudCar/internal/app/common"
-	"cloudCar/internal/app/toolkit/log"
+	"{{.Name}}/internal/app/api"
+	"{{.Name}}/internal/app/common"
+	"{{.Name}}/internal/app/toolkit/log"
 	"fmt"
 	"net/http"
 )
 
 func main() {
-	log.Info("cloudCar start...", "localhost"+common.PORT)
+	log.Info("{{.Name}} start...", "localhost"+common.PORT)
 	api.RegisterApi()
 	err := http.ListenAndServe(common.PORT, nil)
 	if err != nil {

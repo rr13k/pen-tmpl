@@ -29,9 +29,9 @@ func MachineApple(w http.ResponseWriter, r *http.Request) {
 		Disk: args.Disk,
 	}, args.NodeId)
 
-	res := &machineservers.JdosBaseRespone{
+	res := &BaseResponse{
 		Success: true,
-		Code:    "0",
+		Code:    0,
 		Message: "MachineApple Success",
 	}
 
@@ -58,9 +58,9 @@ func ReleaseMachine(w http.ResponseWriter, r *http.Request) {
 		log.Error("无法释放机器name或uuid为nil")
 	}
 
-	res := &machineservers.JdosBaseRespone{
+	res := &BaseResponse{
 		Success: true,
-		Code:    "0",
+		Code:    0,
 		Message: "ReleaseMachine Success",
 	}
 
