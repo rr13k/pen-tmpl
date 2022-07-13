@@ -9,5 +9,6 @@
 </p>
 
 ## 简介
-    `pen`架构模版，以分支的形式提供不同需求的基础架构，
-    使用请前往[pen](https://github.com/rr13k/pen)
+
+`pen`架构模版，以分支的形式提供不同需求的基础架构，
+使用请前往[pen](https://github.com/rr13k/pen)
