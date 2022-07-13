@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"test2/internal/app/servers"
-	"test2/internal/app/servers/user_servers"
+	"{{.Name}}/internal/app/servers"
+	"{{.Name}}/internal/app/servers/user_servers"
 )
 
 func GetUserList(w http.ResponseWriter, r *http.Request) {
