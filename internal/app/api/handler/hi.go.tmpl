@@ -6,8 +6,16 @@ import (
 	"{{.Name}}/internal/app/servers/hi_server"
 )
 
-// 申请机器
+// hi api
 func Hi(w http.ResponseWriter, r *http.Request) {
+
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println("body data:", string(body))
+
 	var result = BaseResponse{
 		Success: true,
 	}
@@ -17,3 +25,4 @@ func Hi(w http.ResponseWriter, r *http.Request) {
 	_res, _ := json.Marshal(result)
 	w.Write(_res)
 }
+
