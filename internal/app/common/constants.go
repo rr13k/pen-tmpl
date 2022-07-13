@@ -2,7 +2,7 @@ package common
 
 var (
 	HOST        = "0.0.0.0"
-	PORT        = ":8867"
+	PORT        = ":8080"
 	SESSION_DIR = "./sessions"
 )
 
