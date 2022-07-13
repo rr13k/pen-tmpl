@@ -7,10 +7,7 @@ import (
 
 func RegisterApi() {
 
-	router.UrlGroup("/machine",
-		router.Url("/apple", handler.MachineApple),
-		router.Url("/release", handler.ReleaseMachine),
-	)
+	router.Url("/hi", handler.Hi)
 
 	router.Init()
 }

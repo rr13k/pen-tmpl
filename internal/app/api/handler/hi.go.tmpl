@@ -1,0 +1,19 @@
+package handler
+
+import (
+	"encoding/json"
+	"net/http"
+	"{{.Name}}/internal/app/servers/hi_server"
+)
+
+// 申请机器
+func Hi(w http.ResponseWriter, r *http.Request) {
+	var result = BaseResponse{
+		Success: true,
+	}
+
+	result.Message = hi_server.Hi()
+	// result.
+	_res, _ := json.Marshal(result)
+	w.Write(_res)
+}
