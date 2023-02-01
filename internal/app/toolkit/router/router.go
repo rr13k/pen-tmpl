@@ -1,6 +1,7 @@
 package router
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -18,6 +19,14 @@ var routerMap []*Router
 type Router struct {
 	path       string
 	middleware []AddrRouter
+}
+
+type RouterNP interface {
+	parseRouter() []*Router
+}
+
+func (rt *Router) parseRouter() []*Router {
+	return []*Router{rt}
 }
 
 type AddrRouter func(http.ResponseWriter, *http.Request)
@@ -38,6 +47,10 @@ func (rt *Router) next(w http.ResponseWriter, r *http.Request) {
 		}
 		rt.middleware[index](w, r)
 	}
+}
+
+func (rt *RouterGroup) parseRouter() []*Router {
+	return *rt
 }
 
 func (routerGroup RouterGroup) Use(mw AddrRouter) RouterGroup {
@@ -63,18 +76,33 @@ func __url(path string, handlerFunc AddrRouter) *Router {
 	return router
 }
 
-// 路由组
-func UrlGroup(pre string, AddrList ...*Router) RouterGroup {
-	for i := range AddrList {
-		r := AddrList[i]
-		r.path = pre + r.path
+// 路由组,支持重复路由搭建
+func UrlGroup(pre string, routerNPs ...RouterNP) *RouterGroup {
+	var AddrList RouterGroup
+	for np := range routerNPs {
+		npAddrList := routerNPs[np].parseRouter()
+		for i := range npAddrList {
+			r := npAddrList[i]
+			r.path = pre + r.path
+		}
+		AddrList = append(AddrList, npAddrList...)
 	}
-	return AddrList
+	return &AddrList
 }
 
 // 设置中断
 func SetBreak(r *http.Request) {
 	r.Header.Set("middleware-break", "1")
+}
+
+// 输出生成的路由信息
+func Debug() {
+	fmt.Println("----路由信息-----")
+	for i := range routerMap {
+		r := routerMap[i]
+		fmt.Println("注册路径:", r.path)
+	}
+	fmt.Println("----路由调试end----")
 }
 
 func Init() {
