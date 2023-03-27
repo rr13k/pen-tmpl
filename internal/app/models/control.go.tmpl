@@ -72,6 +72,6 @@ func Init(config *common.MysqlConfig) {
 }
 
 func GetMysqlDns(config *common.MysqlConfig) string {
-	return fmt.Sprintf("%s:%s@(%s:%d)/%s?charset=%s&parseTime=True",
+	return fmt.Sprintf("%s:%s@(%s:%d)/%s?charset=%s&parseTime=True&loc=Local",
 		config.User, config.Password, config.Host, config.Port, config.Db, config.Charset)
 }
