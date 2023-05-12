@@ -11,10 +11,10 @@ import (
 func main() {
 	log.Info("{{.Name}} start...", "localhost"+common.PORT)
 	api.RegisterApi()
+	fmt.Println("pen server on prod :" + common.PORT, " starting...")
 	err := http.ListenAndServe(common.PORT, nil)
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println("pen server start success, on prod : " + common.PORT)
 }
