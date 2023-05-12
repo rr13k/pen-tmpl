@@ -1,15 +1,17 @@
 package api
 
 import (
-	"{{.Name}}/internal/app/api/handler"
+	"{{.Name}}/internal/app/api/handlers"
 	"{{.Name}}/internal/app/toolkit/router"
 )
 
 func RegisterApi() {
 
 	router.UrlGroup("/user",
-		router.Url("/list", handler.GetUserList),
-		router.Url("/find", handler.GetUser),
+		router.Url("/list", handlers.GetUserList),
+		router.Url("/find", handlers.GetUser),
 	)
+
+	router.Url("/ping", handlers.Ping)
 	router.Init()
 }
