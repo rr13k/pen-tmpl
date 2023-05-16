@@ -1,6 +1,9 @@
 package handlers
 
-import "net/http"
+import (
+	"net/http"
+	_ "{{.Name}}/internal/app/api/handlers/pen_handler"
+)
 
 func Ping(w http.ResponseWriter, r *http.Request) {
 	data := []byte("pong")
