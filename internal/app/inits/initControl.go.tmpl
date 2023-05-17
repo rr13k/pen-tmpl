@@ -1,0 +1,35 @@
+package inits
+
+import (
+	"flag"
+	"os"
+	"path/filepath"
+	"{{.Name}}/internal/app/common"
+	"{{.Name}}/internal/app/inits/parts"
+	"{{.Name}}/internal/app/models"
+	"{{.Name}}/internal/app/toolkit/log"
+	"strconv"
+	"testing"
+)
+
+var Config *common.Config
+
+func Init() {
+	cmdPath, _ := filepath.Abs(os.Args[0])
+	configPath := flag.String("cf", cmdPath+"/configs/config.yml", "config path")
+	// configPath := flag.String("cf", "/configs/config.yml", "config path")
+	testing.Init() // 避免单测时抛出: flag provided but not defined: -test.run
+	flag.Parse()
+	Config = parts.Read(configPath)
+	common.MODE = Config.Mode
+
+	if Config.Server.Port != 0 {
+		common.PORT = ":" + strconv.Itoa(Config.Server.Port)
+	}
+
+	// 初始化日志配置
+	log.InitLog(Config.Logs)
+
+	// 初始化数据库连接
+	models.Init(Config.Mysql)
+}

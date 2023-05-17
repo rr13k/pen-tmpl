@@ -1,0 +1,42 @@
+package parts
+
+import (
+	"fmt"
+	"io/ioutil"
+	"path/filepath"
+	"{{.Name}}/internal/app/common"
+
+	"gopkg.in/yaml.v2"
+)
+
+// 读取配置文件
+func Read(configPath *string) *common.Config {
+	// Read config file
+	filepath, _ := filepath.Abs(*configPath)
+	buf, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		panic(err)
+	}
+	// Unmarshal yml
+	var config *common.Config
+	config = newConfig()
+
+	err = yaml.Unmarshal(buf, &config)
+	if err != nil {
+		fmt.Println("Config Read err : yaml.Unmarshal", err)
+	}
+	return config
+}
+
+func newConfig() *common.Config {
+	return &common.Config{
+		Mysql: &common.MysqlConfig{
+			Host:     "localhost",
+			User:     "root",
+			Password: "root",
+			Port:     3306,
+			Db:       "*",
+			Charset:  "utf8",
+		},
+	}
+}

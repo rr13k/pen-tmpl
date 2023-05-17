@@ -1,12 +1,17 @@
 package main
 
 import (
-	"{{.Name}}/internal/app/api"
-	"{{.Name}}/internal/app/common"
-	"{{.Name}}/internal/app/toolkit/log"
 	"fmt"
 	"net/http"
+	"{{.Name}}/internal/app/api"
+	"{{.Name}}/internal/app/common"
+	"{{.Name}}/internal/app/inits"
+	"{{.Name}}/internal/app/toolkit/log"
 )
+
+func init() {
+	inits.Init()
+}
 
 func main() {
 	log.Info("{{.Name}} start...", "localhost"+common.PORT)
