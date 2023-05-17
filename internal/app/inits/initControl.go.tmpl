@@ -16,7 +16,12 @@ var Config *common.Config
 
 func Init() {
 	cmdPath, _ := filepath.Abs(os.Args[0])
-	configPath := flag.String("cf", cmdPath+"/configs/config.yml", "config path")
+	_runDir := path.Dir(cmdPath)
+
+	if path.Base(_runDir) == "app" {
+		_runDir = path.Dir(path.Dir(_runDir))
+	}
+	configPath := flag.String("cf", _runDir+"/configs/config.yml", "config path")
 	// configPath := flag.String("cf", "/configs/config.yml", "config path")
 	testing.Init() // 避免单测时抛出: flag provided but not defined: -test.run
 	flag.Parse()
