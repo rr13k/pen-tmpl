@@ -8,3 +8,7 @@ type User struct {
 	Role     int    `gorm:"size:255;default:1" json:"role"`
 	Email    string `json:"email" gorm:"type:varchar(250);comment:'邮箱'"`
 }
+
+func (u *User) Comment() string {
+	return "用户表"
+}
