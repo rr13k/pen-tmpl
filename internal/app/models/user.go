@@ -9,6 +9,6 @@ type User struct {
 	Email    string `json:"email" gorm:"type:varchar(250);comment:'邮箱'"`
 }
 
-func (u *User) Comment() string {
+func (u User) Comment() string {
 	return "用户表"
 }
