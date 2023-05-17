@@ -23,11 +23,15 @@ type MysqlConfig struct {
 }
 
 type BaseResponse struct {
-	Msg   string      `json:"msg"`
-	Code  int         `json:"code"`
+	Msg     string      `json:"msg"`
+	Code    int         `json:"code"`
+	Data    interface{} `json:"data"`
+	Success bool        `json:"success"`
+}
+
+type ListResult struct {
 	Data  interface{} `json:"data"`
 	Total int         `json:"total"`
-	Success bool      `json:"success"`
 }
 
 type RunReport struct {
