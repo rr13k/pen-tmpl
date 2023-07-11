@@ -98,16 +98,28 @@ func SetBreak(r *http.Request) {
 // 输出生成的路由信息
 func Debug() {
 	fmt.Println("----路由信息-----")
-	for i := range routerMap {
-		r := routerMap[i]
+	routers := FilterMultiple()
+	for i := range routers {
+		r := routers[i]
 		fmt.Println("注册路径:", r.path)
 	}
 	fmt.Println("----路由调试end----")
 }
 
-func Init() {
+// 过滤重复路由以实现函数覆盖
+func FilterMultiple() map[string]*Router {
+	routers := make(map[string]*Router)
 	for i := range routerMap {
 		r := routerMap[i]
+		routers[r.path] = r
+	}
+	return routers
+}
+
+func Init() {
+	routers := FilterMultiple()
+	for i := range routers {
+		r := routers[i]
 		http.HandleFunc(r.path, r.next)
 	}
 }
